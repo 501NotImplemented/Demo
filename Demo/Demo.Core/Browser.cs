@@ -20,7 +20,7 @@ namespace Demo.Core
 		}
 
 		/// <summary>
-		/// Gets or sets webDriver storage for parallelization in a single machine
+		/// Gets or sets webDriver storage for parallelization on a single machine
 		/// </summary>
 		public static IWebDriver Instance
 		{
@@ -60,11 +60,16 @@ namespace Demo.Core
 			var chromeOptions = ChromeProfile;
 			WebDrivers.Value = new ChromeDriver(driverDirectory, chromeOptions);
 
+			SetTimeouts();
+
+			DeleteAllCookies();
+		}
+
+		private static void SetTimeouts()
+		{
 			Instance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
 			Instance.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
 			Instance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
-
-			DeleteAllCookies();
 		}
 
 		/// <summary>
