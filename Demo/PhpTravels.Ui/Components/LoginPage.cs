@@ -4,9 +4,9 @@ using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components
 {
-	public class LoginPage
+	public class LoginPage : BasePage
 	{
-		private readonly string _url = "login";
+		public override string Url => "login";
 
 		private IWebElement TxtEmail => Browser.Instance.FindElement(By.XPath("//input[@name='username']"));
 
@@ -33,11 +33,6 @@ namespace PhpTravels.Ui.Components
 		{
 			Parallel.Invoke(() => SetEmail(userName), () => SetPassword(password));
 			ClickLoginButton();
-		}
-
-		public void Open()
-		{
-			Browser.NavigateTo($"{Configuration.PhpTravels.Settings.BaseUrl.Trim()}{_url}");
 		}
 	}
 }

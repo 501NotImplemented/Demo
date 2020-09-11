@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Demo.Core;
+using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components
 {
-	public class AccountPage
+	public class AccountPage : BasePage
 	{
-		public string CurrentDate { get; }
+		public override string Url => "account/";
 
-		public void WaitToBeOpened()
+		public string CurrentDate
 		{
-			throw new NotImplementedException();
+			get
+			{
+				var element = Browser.Instance.FindElement(By.XPath("//div[@class='col-md-6 go-left RTL']"));
+				return element.Text;
+			}
 		}
 	}
 }

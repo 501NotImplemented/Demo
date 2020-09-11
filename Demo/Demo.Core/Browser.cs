@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 
 namespace Demo.Core
 {
@@ -110,6 +112,17 @@ namespace Demo.Core
 		public static void DeleteAllCookies()
 		{
 			Instance.Manage().Cookies.DeleteAllCookies();
+		}
+
+		/// <summary>
+		/// Wait for URL to be opened
+		/// </summary>
+		/// <param name="expectedUrl">Expected URL</param>
+		/// <param name="timeOut">Timeout, seconds</param>
+		public static void WaitForUrlToBeOpened(string expectedUrl, TimeSpan timeOut)
+		{
+			var wait = new WebDriverWait(Instance, timeOut);
+			wait.Until(ExpectedConditions.UrlToBe(expectedUrl.ToLower()));
 		}
 	}
 }

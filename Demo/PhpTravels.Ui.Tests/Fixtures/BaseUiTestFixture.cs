@@ -4,9 +4,10 @@ using PhpTravels.Ui.Facades;
 
 namespace PhpTravels.Ui.Tests.Fixtures
 {
-	[TestFixture]
 	public class BaseUiTestFixture
 	{
+		protected static UserLoginFacade UserLoginFacade => new UserLoginFacade();
+
 		[SetUp]
 		public void Setup()
 		{
@@ -24,7 +25,5 @@ namespace PhpTravels.Ui.Tests.Fixtures
 		{
 			Browser.Quit();
 		}
-
-		protected static UserLoginFacade UserLoginFacade => new UserLoginFacade();
 	}
 }
