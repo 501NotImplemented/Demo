@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -13,7 +14,7 @@ namespace Demo.Core
 		/// <summary>
 		/// Storage of webdrivers
 		/// </summary>
-		private static readonly ThreadLocal<IWebDriver> WebDrivers = new ThreadLocal<IWebDriver>();
+		private static readonly ThreadLocal<IWebDriver> WebDrivers = new ThreadLocal<IWebDriver>(true);
 
 		private Browser()
 		{
@@ -26,15 +27,20 @@ namespace Demo.Core
 		{
 			get
 			{
-				if (WebDrivers.Value == null)
+				if (WebDrivers.IsValueCreated)
 				{
-					Start();
+					return WebDrivers.Value;
 				}
 
-				return WebDrivers.Value;
+				if (WebDrivers.Values.Count > 0)
+				{
+					return WebDrivers.Values.First();
+				}
+
+				throw new InvalidOperationException("Driver is not started for given thread");
 			}
 
-			set => WebDrivers.Value = value;
+			internal set => WebDrivers.Value = value;
 		}
 
 		private static ChromeOptions ChromeProfile
@@ -48,6 +54,15 @@ namespace Demo.Core
 			}
 		}
 
+		/// <summary>
+		/// Navigate to specified URL
+		/// </summary>
+		/// <param name="url">URL to navigate</param>
+		public static void NavigateTo(string url)
+		{
+			Instance.Navigate().GoToUrl(url);
+		}
+
 
 		/// <summary>
 		/// Start the browser instance
@@ -58,7 +73,8 @@ namespace Demo.Core
 			var driverDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
 			var chromeOptions = ChromeProfile;
-			WebDrivers.Value = new ChromeDriver(driverDirectory, chromeOptions);
+			var chrome = new ChromeDriver(driverDirectory, chromeOptions);
+			WebDrivers.Value = chrome;
 
 			SetTimeouts();
 
