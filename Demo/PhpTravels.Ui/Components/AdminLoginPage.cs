@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using Demo.Core;
+using Demo.Core.Engine;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;

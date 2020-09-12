@@ -1,5 +1,7 @@
 ﻿using System;
-using Demo.Core;
+
+using Demo.Core.Engine;
+
 using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components
@@ -7,8 +9,6 @@ namespace PhpTravels.Ui.Components
 	public class AccountPage : BasePage
 	{
 		private readonly string _title = "My Account";
-
-		public override string Url => $"{Configuration.PhpTravels.Settings.BaseUrl}account/";
 
 		public string CurrentDate
 		{
@@ -18,6 +18,8 @@ namespace PhpTravels.Ui.Components
 				return element.Text;
 			}
 		}
+
+		public override string Url => $"{Configuration.PhpTravels.Settings.BaseUrl}account/";
 
 		public override void WaitToBeOpened()
 		{

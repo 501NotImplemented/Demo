@@ -1,4 +1,4 @@
-﻿using Demo.Core;
+﻿using Demo.Core.Engine;
 
 namespace PhpTravels.Ui.Components.Home
 {
@@ -6,9 +6,9 @@ namespace PhpTravels.Ui.Components.Home
 	{
 		private readonly string _title = "PHPTRAVELS |";
 
-		public override string Url => Configuration.PhpTravels.Settings.BaseUrl.Trim();
-
 		public FeaturedHotelsSection FeaturedHotels => new FeaturedHotelsSection();
+
+		public override string Url => Configuration.PhpTravels.Settings.BaseUrl.Trim();
 
 		public override void WaitToBeOpened()
 		{

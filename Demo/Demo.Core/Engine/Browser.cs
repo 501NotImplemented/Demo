@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
-namespace Demo.Core
+namespace Demo.Core.Engine
 {
 	/// <summary>
 	/// Wrapper around webdriver
