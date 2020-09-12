@@ -7,7 +7,7 @@ using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace PhpTravels.Ui.Components
 {
-	public class LoginPage : BasePage
+	public class UserLoginPage : BasePage
 	{
 		public override string Url => $"{Configuration.PhpTravels.Settings.BaseUrl}login";
 

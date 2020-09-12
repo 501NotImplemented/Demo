@@ -1,11 +1,13 @@
 ﻿using NUnit.Framework;
+
 using PhpTravels.Ui.Components.Home;
+using PhpTravels.Ui.Entities;
 using PhpTravels.Ui.Tests.Assertions;
 
 namespace PhpTravels.Ui.Tests.Fixtures
 {
 	[TestFixture]
-	[Parallelizable]
+	[Parallelizable(ParallelScope.Children)]
 	public class HomePageTests : BaseUiTestFixture
 	{
 		private static HomePage HomePage => new HomePage();
@@ -13,13 +15,13 @@ namespace PhpTravels.Ui.Tests.Fixtures
 		[Test]
 		public void CanFindCheapestHotel()
 		{
-			UserLoginFacade.LoginAsDemoUser();
+			LoginFacade.LoginAsDemoUser();
 			HomePage.Open();
 
 			var expectedHotel = new Hotel
-			{
-				Price = 20, Title = "Malmaison Manchester"
-			};
+									{
+										Price = 20, Title = "Malmaison Manchester"
+									};
 
 			HomePage.FeaturedHotels.AssertCheapestHotelIs(expectedHotel);
 		}

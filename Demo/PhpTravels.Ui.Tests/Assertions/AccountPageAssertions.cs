@@ -4,6 +4,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using PhpTravels.Ui.Components;
 using PhpTravels.Ui.Components.Home;
+using PhpTravels.Ui.Entities;
 
 namespace PhpTravels.Ui.Tests.Assertions
 {

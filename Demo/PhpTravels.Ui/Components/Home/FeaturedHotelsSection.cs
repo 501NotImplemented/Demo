@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Demo.Core;
 using OpenQA.Selenium;
+using PhpTravels.Ui.Entities;
 
 namespace PhpTravels.Ui.Components.Home
 {

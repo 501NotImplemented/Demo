@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+
 using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
 namespace Demo.Core
@@ -14,14 +16,14 @@ namespace Demo.Core
 	public class Browser
 	{
 		/// <summary>
-		/// Storage of webdrivers
-		/// </summary>
-		private static readonly ThreadLocal<IWebDriver> WebDrivers = new ThreadLocal<IWebDriver>(true);
-
-		/// <summary>
 		/// Storage of EventFiringBrowsers
 		/// </summary>
 		private static readonly ThreadLocal<IWebDriver> EventFiringDrivers = new ThreadLocal<IWebDriver>(true);
+
+		/// <summary>
+		/// Storage of webdrivers
+		/// </summary>
+		private static readonly ThreadLocal<IWebDriver> WebDrivers = new ThreadLocal<IWebDriver>(true);
 
 		private Browser()
 		{
@@ -50,6 +52,8 @@ namespace Demo.Core
 			internal set => EventFiringDrivers.Value = value;
 		}
 
+		public static string Title => Instance.Title;
+
 		private static ChromeOptions ChromeProfile
 		{
 			get
@@ -60,8 +64,6 @@ namespace Demo.Core
 				return chromeOptions;
 			}
 		}
-
-		public static string Title => Instance.Title;
 
 		/// <summary>
 		/// Gets or sets webDriver storage for parallelization in a single machine
@@ -74,26 +76,19 @@ namespace Demo.Core
 		}
 
 		/// <summary>
-		/// Wait for active JQuery to complete
+		/// Close the browser window
 		/// </summary>
-		/// <param name="numberOfRequests">Number of active requests to be left, default to 0</param>
-		/// <param name="timeOut">Timeout, seconds</param>
-		public static void WaitForActiveJQueryToComplete(int numberOfRequests = 0, int timeOut = 20)
+		public static void Close()
 		{
-			var isJqueryPresent = IsJQueryUsedOnThePage();
-
-			if (isJqueryPresent)
-			{
-				var wait = new WebDriverWait(Instance, TimeSpan.FromSeconds(timeOut));
-				wait.Until(driver => ((IJavaScriptExecutor) Instance).ExecuteScript($"return jQuery.active == {numberOfRequests}"));
-			}
+			Instance.Close();
 		}
 
-		public static bool IsJQueryUsedOnThePage()
+		/// <summary>
+		/// Delete all browser cookies
+		/// </summary>
+		public static void DeleteAllCookies()
 		{
-			var script = "return window.jQuery != undefined";
-			var isJqueryUsed = Convert.ToBoolean(InvokeScript(script));
-			return isJqueryUsed;
+			Instance.Manage().Cookies.DeleteAllCookies();
 		}
 
 		/// <summary>
@@ -110,14 +105,11 @@ namespace Demo.Core
 			return Convert.ToString(result);
 		}
 
-		/// <summary>
-		/// Wait for document.readyState status on the page to be completed
-		/// </summary>
-		/// <param name="timeOut">Timeout, seconds</param>
-		public static void WaitForPageReadyStateToComplete(double timeOut = 280.00)
+		public static bool IsJQueryUsedOnThePage()
 		{
-			var wait = new WebDriverWait(Instance, TimeSpan.FromSeconds(timeOut));
-			wait.Until(driver => ((IJavaScriptExecutor) Instance).ExecuteScript("return document.readyState").Equals("complete"));
+			var script = "return window.jQuery != undefined";
+			var isJqueryUsed = Convert.ToBoolean(InvokeScript(script));
+			return isJqueryUsed;
 		}
 
 		/// <summary>
@@ -127,6 +119,14 @@ namespace Demo.Core
 		public static void NavigateTo(string url)
 		{
 			Instance.Navigate().GoToUrl(url);
+		}
+
+		/// <summary>
+		/// Quit driver
+		/// </summary>
+		public static void Quit()
+		{
+			Instance.Quit();
 		}
 
 		/// <summary>
@@ -146,35 +146,35 @@ namespace Demo.Core
 			DeleteAllCookies();
 		}
 
-		private static void SetTimeouts()
+		/// <summary>
+		/// Wait for active JQuery to complete
+		/// </summary>
+		/// <param name="numberOfRequests">Number of active requests to be left, default to 0</param>
+		/// <param name="timeOut">Timeout, seconds</param>
+		public static void WaitForActiveJQueryToComplete(int numberOfRequests = 0, int timeOut = 20)
 		{
-			NativeDriverInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-			NativeDriverInstance.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
-			NativeDriverInstance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
+			var isJqueryPresent = IsJQueryUsedOnThePage();
+
+			if (isJqueryPresent)
+			{
+				var wait = new WebDriverWait(Instance, TimeSpan.FromSeconds(timeOut));
+				wait.Until(driver => ((IJavaScriptExecutor)Instance).ExecuteScript($"return jQuery.active == {numberOfRequests}"));
+			}
 		}
 
 		/// <summary>
-		/// Close the browser window
+		/// Wait for document.readyState status on the page to be completed
 		/// </summary>
-		public static void Close()
+		/// <param name="timeOut">Timeout, seconds</param>
+		public static void WaitForPageReadyStateToComplete(double timeOut = 280.00)
 		{
-			Instance.Close();
+			var wait = new WebDriverWait(Instance, TimeSpan.FromSeconds(timeOut));
+			wait.Until(driver => ((IJavaScriptExecutor)Instance).ExecuteScript("return document.readyState").Equals("complete"));
 		}
 
-		/// <summary>
-		/// Quit driver
-		/// </summary>
-		public static void Quit()
+		public static void WaitForPageTitleToContain(string expectedPart)
 		{
-			Instance.Quit();
-		}
-
-		/// <summary>
-		/// Delete all browser cookies
-		/// </summary>
-		public static void DeleteAllCookies()
-		{
-			Instance.Manage().Cookies.DeleteAllCookies();
+			Wait.Until(() => Title.Contains(expectedPart), TimeSpan.FromSeconds(5));
 		}
 
 		/// <summary>
@@ -188,9 +188,11 @@ namespace Demo.Core
 			wait.Until(ExpectedConditions.UrlToBe(expectedUrl.ToLower()));
 		}
 
-		public static void WaitForPageTitleToContain(string expectedPart)
+		private static void SetTimeouts()
 		{
-			Wait.Until(() => Title.Contains(expectedPart), TimeSpan.FromSeconds(5));
+			NativeDriverInstance.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+			NativeDriverInstance.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(60);
+			NativeDriverInstance.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
 		}
 	}
 }

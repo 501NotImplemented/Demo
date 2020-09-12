@@ -1,19 +1,17 @@
 ﻿using NUnit.Framework;
-using PhpTravels.Ui.Components;
+
 using PhpTravels.Ui.Tests.Assertions;
 
 namespace PhpTravels.Ui.Tests.Fixtures
 {
 	[TestFixture(Description = "UI tests for user account page")]
-	[Parallelizable]
+	[Parallelizable(ParallelScope.Children)]
 	public class UserAccountTests : BaseUiTestFixture
 	{
-		private static AccountPage AccountPage => new AccountPage();
-
 		[Test]
 		public void CurrentDateIsDisplayedOnUserAccount()
 		{
-			UserLoginFacade.LoginAsDemoUser();
+			LoginFacade.LoginAsDemoUser();
 			AccountPage.AssertCurrentDateIsDisplayed();
 		}
 	}
