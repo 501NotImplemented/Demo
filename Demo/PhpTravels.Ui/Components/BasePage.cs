@@ -11,12 +11,13 @@ namespace PhpTravels.Ui.Components
 
 		public virtual void WaitToBeOpened()
 		{
-			Browser.WaitForUrlToBeOpened($"{Configuration.PhpTravels.Settings.BaseUrl}{Url}", TimeSpan.FromSeconds(10));
+			Browser.WaitForUrlToBeOpened($"{Url}", TimeSpan.FromSeconds(5));
 		}
 
-		public void Open()
+		public virtual void Open()
 		{
-			Browser.NavigateTo($"{Configuration.PhpTravels.Settings.BaseUrl.Trim()}{Url}");
+			Browser.NavigateTo($"{Url}");
+			WaitToBeOpened();
 		}
 	}
 }

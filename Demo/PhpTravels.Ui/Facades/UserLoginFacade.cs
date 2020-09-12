@@ -6,10 +6,13 @@ namespace PhpTravels.Ui.Facades
 	{
 		private LoginPage LoginPage => new LoginPage();
 
+		private static AccountPage AccountPage => new AccountPage();
+
 		public void LoginAsDemoUser()
 		{
 			LoginPage.Open();
 			LoginPage.Login(Configuration.PhpTravels.Settings.DemoUserName, Configuration.PhpTravels.Settings.DemoUserPassword);
+			AccountPage.WaitToBeOpened();
 		}
 	}
 }
