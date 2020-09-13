@@ -1,4 +1,4 @@
-﻿namespace PhpTravels.Ui.Configuration
+﻿namespace PhpTravels.Configuration
 {
 	public static class PhpTravels
 	{
