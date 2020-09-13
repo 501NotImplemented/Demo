@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PhpTravels.Configuration\PhpTravels.Configuration.csproj" />
     <ProjectReference Include="..\PhpTravels.Ui\PhpTravels.Ui.csproj" />
   </ItemGroup>
 

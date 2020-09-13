@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhpTravels.Ui.Tests", "PhpT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhpTravels.Ui", "PhpTravels.Ui\PhpTravels.Ui.csproj", "{7CA81DC4-11A7-49B4-A602-85F67A9C3EEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhpTravels.Ui.Workflows", "PhpTravels.Ui.Workflows\PhpTravels.Ui.Workflows.csproj", "{1B4679CB-D4A5-407B-ABB5-F5EA8EB16517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhpTravels.Ui.Workflows", "PhpTravels.Ui.Workflows\PhpTravels.Ui.Workflows.csproj", "{1B4679CB-D4A5-407B-ABB5-F5EA8EB16517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhpTravels.Configuration", "PhpTravels.Configuration\PhpTravels.Configuration.csproj", "{0AA78A90-A695-4D1C-B4AE-4E164FBE1CCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1B4679CB-D4A5-407B-ABB5-F5EA8EB16517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B4679CB-D4A5-407B-ABB5-F5EA8EB16517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B4679CB-D4A5-407B-ABB5-F5EA8EB16517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AA78A90-A695-4D1C-B4AE-4E164FBE1CCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AA78A90-A695-4D1C-B4AE-4E164FBE1CCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AA78A90-A695-4D1C-B4AE-4E164FBE1CCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AA78A90-A695-4D1C-B4AE-4E164FBE1CCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -24,6 +24,12 @@
     <ProjectReference Include="..\Demo.Core\Demo.Core.csproj" />
     <ProjectReference Include="..\PhpTravels.Ui.Workflows\PhpTravels.Ui.Workflows.csproj" />
     <ProjectReference Include="..\PhpTravels.Ui\PhpTravels.Ui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
