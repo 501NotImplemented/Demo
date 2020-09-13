@@ -3,7 +3,7 @@ using PhpTravels.Ui.Components.AdminsManagement;
 using PhpTravels.Ui.Components.Dashboard;
 using PhpTravels.Ui.Entities;
 
-namespace PhpTravels.Ui.Facades
+namespace PhpTravels.Ui.Workflows.Facades
 {
 	public class AdminUiFacade
 	{

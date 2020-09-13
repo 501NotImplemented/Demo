@@ -2,8 +2,8 @@
 
 using PhpTravels.Ui.Components.AddAdmin;
 using PhpTravels.Ui.Components.AdminsManagement;
-using PhpTravels.Ui.Facades;
 using PhpTravels.Ui.Tests.Assertions;
+using PhpTravels.Ui.Workflows.Facades;
 
 namespace PhpTravels.Ui.Tests.Fixtures
 {
