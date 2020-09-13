@@ -91,24 +91,10 @@ namespace Demo.Core.Engine
 			Instance.Manage().Cookies.DeleteAllCookies();
 		}
 
-		/// <summary>
-		/// Invoke JavaScript
-		/// </summary>
-		/// <param name="script">Script source</param>
-		/// <param name="args">Optional arguments</param>
-		/// <returns>String</returns>
-		public static string InvokeScript(string script, params object[] args)
-		{
-			var javaScriptExecutor =
-				Instance as IJavaScriptExecutor;
-			var result = javaScriptExecutor.ExecuteScript(script, args);
-			return Convert.ToString(result);
-		}
-
 		public static bool IsJQueryUsedOnThePage()
 		{
 			var script = "return window.jQuery != undefined";
-			var isJqueryUsed = Convert.ToBoolean(InvokeScript(script));
+			var isJqueryUsed = Convert.ToBoolean(((IJavaScriptExecutor)Instance).ExecuteScript(script));
 			return isJqueryUsed;
 		}
 
