@@ -1,7 +1,7 @@
 ﻿using PhpTravels.Ui.Components;
 using PhpTravels.Ui.Components.Dashboard;
 
-namespace PhpTravels.Ui.Facades
+namespace PhpTravels.Ui.Workflows.Facades
 {
 	public class LoginFacade
 	{

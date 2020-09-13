@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 using PhpTravels.Ui.Components;
 using PhpTravels.Ui.Components.Dashboard;
-using PhpTravels.Ui.Facades;
+using PhpTravels.Ui.Workflows.Facades;
 
 namespace PhpTravels.Ui.Tests.Fixtures
 {
