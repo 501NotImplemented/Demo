@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,15 +17,47 @@ namespace PhpTravels.Configuration
 			ConfigureServices(serviceCollection);
 		}
 
-		public string AdminPassword => _configuration.GetSection("AdminSettings:Password").Value;
+		public string AdminPassword
+		{
+			get
+			{
+				var initialValue = _configuration.GetSection("AdminSettings:Password").Value;
+				var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(initialValue));
+				return decoded;
+			}
+		}
 
-		public string AdminUserName => _configuration.GetSection("AdminSettings:Username").Value;
+		public string AdminUserName
+		{
+			get
+			{
+				var initialValue = _configuration.GetSection("AdminSettings:Username").Value;
+				var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(initialValue));
+				return decoded;
+			}
+		}
 
 		public string BaseUrl => _configuration["BaseUrl"];
 
-		public string DemoUserName => _configuration.GetSection("UserSettings:Username").Value;
+		public string DemoUserName
+		{
+			get
+			{
+				var initialValue = _configuration.GetSection("UserSettings:Username").Value;
+				var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(initialValue));
+				return decoded;
+			}
+		}
 
-		public string DemoUserPassword => _configuration.GetSection("UserSettings:Password").Value;
+		public string DemoUserPassword
+		{
+			get
+			{
+				var initialValue = _configuration.GetSection("UserSettings:Password").Value;
+				var decoded = Encoding.UTF8.GetString(Convert.FromBase64String(initialValue));
+				return decoded;
+			}
+		}
 
 		private void ConfigureServices(IServiceCollection serviceCollection)
 		{
