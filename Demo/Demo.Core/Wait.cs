@@ -10,6 +10,15 @@ namespace Demo.Core
 		private static readonly TimeSpan SleepTimeout = TimeSpan.FromMilliseconds(150);
 
 		/// <summary>
+		/// Wait using Thread.Sleep
+		/// </summary>
+		/// <param name="timeout">Timeout in TimeSpan format</param>
+		public static void For(TimeSpan timeout)
+		{
+			Thread.Sleep(timeout);
+		}
+
+		/// <summary>
 		/// Wait for a condition with given timeout
 		/// </summary>
 		/// <param name="action">The condition to be met</param>
@@ -32,7 +41,8 @@ namespace Demo.Core
 				{
 					For(SleepTimeout);
 				}
-			} while (!isActionCompleted && DateTime.Now < timeoutDate);
+			}
+			while (!isActionCompleted && DateTime.Now < timeoutDate);
 
 			if (isActionCompleted == false)
 			{
@@ -40,15 +50,6 @@ namespace Demo.Core
 
 				throw new TimeoutException(errorMessage);
 			}
-		}
-
-		/// <summary>
-		/// Wait using Thread.Sleep
-		/// </summary>
-		/// <param name="timeout">Timeout in TimeSpan format</param>
-		public static void For(TimeSpan timeout)
-		{
-			Thread.Sleep(timeout);
 		}
 	}
 }

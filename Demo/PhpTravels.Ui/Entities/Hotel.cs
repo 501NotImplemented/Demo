@@ -1,4 +1,4 @@
-﻿namespace PhpTravels.Ui.Components.Home
+﻿namespace PhpTravels.Ui.Entities
 {
 	public class Hotel
 	{

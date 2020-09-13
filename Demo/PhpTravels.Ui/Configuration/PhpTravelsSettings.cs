@@ -11,5 +11,9 @@
 		public string DemoUserPassword => "demouser";
 
 		public string BaseUrl => "https://www.phptravels.net/";
+
+		public string AdminUserName => "admin@phptravels.com";
+
+		public string AdminPassword => "demoadmin";
 	}
 }

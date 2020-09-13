@@ -1,4 +1,4 @@
-﻿namespace PhpTravels.Ui.Components
+﻿namespace PhpTravels.Ui.Contracts
 {
 	public interface IPage
 	{
