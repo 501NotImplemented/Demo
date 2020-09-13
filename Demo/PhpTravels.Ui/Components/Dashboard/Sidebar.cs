@@ -1,15 +1,16 @@
 ﻿using System;
 
-using Demo.Core.Engine;
-
 using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components.Dashboard
 {
 	public class Sidebar
 	{
-		internal Sidebar()
+		private readonly IWebDriver _driver;
+
+		internal Sidebar(IWebDriver driver)
 		{
+			_driver = driver;
 		}
 
 		public void NavigateTo(SidebarRootItem rootItem, SidebarSubItem subItem)
@@ -36,13 +37,13 @@ namespace PhpTravels.Ui.Components.Dashboard
 
 		private IWebElement GetRootLink(SidebarRootItem rootItem)
 		{
-			var link = Browser.Instance.FindElement(By.XPath($"//a[@href='#{rootItem.ToString().ToUpperInvariant()}']"));
+			var link = _driver.FindElement(By.XPath($"//a[@href='#{rootItem.ToString().ToUpperInvariant()}']"));
 			return link;
 		}
 
 		private IWebElement GetSubItemLink(SidebarSubItem subItem)
 		{
-			var link = Browser.Instance.FindElement(By.XPath($"//a[text()='{subItem}']"));
+			var link = _driver.FindElement(By.XPath($"//a[text()='{subItem}']"));
 			return link;
 		}
 

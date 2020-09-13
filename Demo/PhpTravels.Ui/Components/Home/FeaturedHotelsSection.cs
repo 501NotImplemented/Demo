@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Demo.Core.Engine;
-
 using OpenQA.Selenium;
 
 using PhpTravels.Ui.Entities;
@@ -13,8 +11,11 @@ namespace PhpTravels.Ui.Components.Home
 {
 	public class FeaturedHotelsSection
 	{
-		internal FeaturedHotelsSection()
+		private readonly IWebDriver _driver;
+
+		internal FeaturedHotelsSection(IWebDriver driver)
 		{
+			_driver = driver;
 		}
 
 		public Hotel Cheapest => GetHotels().OrderByDescending(h => h.Price).Last();
@@ -54,7 +55,7 @@ namespace PhpTravels.Ui.Components.Home
 
 		private List<IWebElement> GetHotelWebElements()
 		{
-			var hotels = Browser.Instance.FindElements(By.XPath("//div[@class='mb-40']//div[@id='MenuHorizon28_01']//div[@class='product-grid-item']"));
+			var hotels = _driver.FindElements(By.XPath("//div[@class='mb-40']//div[@id='MenuHorizon28_01']//div[@class='product-grid-item']"));
 			return hotels.ToList();
 		}
 	}

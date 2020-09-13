@@ -8,12 +8,12 @@ using PhpTravels.Ui.Workflows.Facades;
 namespace PhpTravels.Ui.Tests.Fixtures
 {
 	[TestFixture]
-	[Parallelizable(ParallelScope.Children)]
+	[Parallelizable(ParallelScope.All)]
 	public class AdminTests : BaseUiTestFixture
 	{
-		private AddAdminPage AddAdminPage => new AddAdminPage();
+		private AddAdminPage AddAdminPage => new AddAdminPage(Driver);
 
-		private AdminsManagementPage AdminsManagementPage => new AdminsManagementPage();
+		private AdminsManagementPage AdminsManagementPage => new AdminsManagementPage(Driver);
 
 		private AdminUiFacade AdminUiFacade => new AdminUiFacade(AdminsManagementPage, AddAdminPage, DashboardPage);
 

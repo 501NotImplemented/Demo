@@ -1,11 +1,18 @@
-﻿using PhpTravels.Ui.Components.Dashboard;
+﻿using OpenQA.Selenium;
+
+using PhpTravels.Ui.Components.Dashboard;
 using PhpTravels.Ui.Entities;
 
 namespace PhpTravels.Ui.Components.AddAdmin
 {
 	public class AddAdminPage : BaseAdminPage
 	{
-		public AddAdminForm AddAdminForm => new AddAdminForm();
+		public AddAdminPage(IWebDriver driver)
+			: base(driver)
+		{
+		}
+
+		public AddAdminForm AddAdminForm => new AddAdminForm(Driver);
 
 		public override string Title => "Add Admin";
 

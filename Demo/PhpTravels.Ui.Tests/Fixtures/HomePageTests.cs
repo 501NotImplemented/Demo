@@ -7,10 +7,10 @@ using PhpTravels.Ui.Tests.Assertions;
 namespace PhpTravels.Ui.Tests.Fixtures
 {
 	[TestFixture]
-	[Parallelizable(ParallelScope.Children)]
+	[Parallelizable(ParallelScope.All)]
 	public class HomePageTests : BaseUiTestFixture
 	{
-		private static HomePage HomePage => new HomePage();
+		private HomePage HomePage => new HomePage(Driver);
 
 		[Test]
 		public void CanFindCheapestHotel()

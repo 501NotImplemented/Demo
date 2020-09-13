@@ -1,16 +1,23 @@
-﻿using Demo.Core.Engine;
+﻿using Demo.Core;
+
+using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components.Dashboard
 {
 	public abstract class BaseAdminPage : BasePage
 	{
-		public Sidebar Sidebar => new Sidebar();
+		protected BaseAdminPage(IWebDriver driver)
+			: base(driver)
+		{
+		}
+
+		public Sidebar Sidebar => new Sidebar(Driver);
 
 		public abstract string Title { get; }
 
 		public override void WaitToBeOpened()
 		{
-			Browser.WaitForPageTitleToContain(Title);
+			Driver.WaitForPageTitleToContain(Title);
 			base.WaitToBeOpened();
 		}
 	}

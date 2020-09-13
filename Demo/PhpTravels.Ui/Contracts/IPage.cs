@@ -2,12 +2,12 @@
 {
 	public interface IPage
 	{
-		string Url { get; }
-
 		bool IsOpened { get; }
 
-		void WaitToBeOpened();
+		string Url { get; }
 
 		void Open();
+
+		void WaitToBeOpened();
 	}
 }
