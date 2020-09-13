@@ -1,6 +1,6 @@
 ﻿using System;
 
-using Demo.Core.Engine;
+using Demo.Core;
 
 using OpenQA.Selenium;
 
@@ -10,11 +10,16 @@ namespace PhpTravels.Ui.Components
 	{
 		private readonly string _title = "My Account";
 
+		public AccountPage(IWebDriver driver)
+			: base(driver)
+		{
+		}
+
 		public string CurrentDate
 		{
 			get
 			{
-				var element = Browser.Instance.FindElement(By.XPath("//div[@class='col-md-6 go-left RTL']"));
+				var element = Driver.FindElement(By.XPath("//div[@class='col-md-6 go-left RTL']"));
 				return element.Text;
 			}
 		}
@@ -23,8 +28,8 @@ namespace PhpTravels.Ui.Components
 
 		public override void WaitToBeOpened()
 		{
-			Browser.WaitForPageTitleToContain(_title);
-			Browser.WaitForUrlToBeOpened(Url, TimeSpan.FromSeconds(3));
+			Driver.WaitForPageTitleToContain(_title);
+			Driver.WaitForUrlToBeOpened(Url, TimeSpan.FromSeconds(3));
 		}
 	}
 }

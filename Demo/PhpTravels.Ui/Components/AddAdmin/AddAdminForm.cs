@@ -1,5 +1,4 @@
 ﻿using Demo.Core.Elements;
-using Demo.Core.Engine;
 
 using OpenQA.Selenium;
 
@@ -7,27 +6,30 @@ namespace PhpTravels.Ui.Components.AddAdmin
 {
 	public class AddAdminForm
 	{
-		internal AddAdminForm()
+		private readonly IWebDriver _driver;
+
+		internal AddAdminForm(IWebDriver driver)
 		{
+			_driver = driver;
 		}
 
-		private IWebElement BtnSubmit => Browser.Instance.FindElement(By.XPath("//button[@class='btn btn-primary btn-block btn-lg']"));
+		private IWebElement BtnSubmit => _driver.FindElement(By.XPath("//button[@class='btn btn-primary btn-block btn-lg']"));
 
-		private Combobox CboCountry => new Combobox(Browser.Instance.FindElement(By.XPath("//div[@id='s2id_autogen1']")));
+		private Combobox CboCountry => new Combobox(_driver.FindElement(By.XPath("//div[@id='s2id_autogen1']")));
 
-		private IWebElement TxtAddress1 => Browser.Instance.FindElement(By.XPath("//input[@name='address1']"));
+		private IWebElement TxtAddress1 => _driver.FindElement(By.XPath("//input[@name='address1']"));
 
-		private IWebElement TxtAddress2 => Browser.Instance.FindElement(By.XPath("//input[@name='address2']"));
+		private IWebElement TxtAddress2 => _driver.FindElement(By.XPath("//input[@name='address2']"));
 
-		private IWebElement TxtEmail => Browser.Instance.FindElement(By.XPath("//input[@name='email']"));
+		private IWebElement TxtEmail => _driver.FindElement(By.XPath("//input[@name='email']"));
 
-		private IWebElement TxtFirstName => Browser.Instance.FindElement(By.XPath("//input[@name='fname']"));
+		private IWebElement TxtFirstName => _driver.FindElement(By.XPath("//input[@name='fname']"));
 
-		private IWebElement TxtLastName => Browser.Instance.FindElement(By.XPath("//input[@name='lname']"));
+		private IWebElement TxtLastName => _driver.FindElement(By.XPath("//input[@name='lname']"));
 
-		private IWebElement TxtMobileNumber => Browser.Instance.FindElement(By.XPath("//input[@name='mobile']"));
+		private IWebElement TxtMobileNumber => _driver.FindElement(By.XPath("//input[@name='mobile']"));
 
-		private IWebElement TxtPassword => Browser.Instance.FindElement(By.XPath("//input[@name='password']"));
+		private IWebElement TxtPassword => _driver.FindElement(By.XPath("//input[@name='password']"));
 
 		public void ClickSubmitButton()
 		{

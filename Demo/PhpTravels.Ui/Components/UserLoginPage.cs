@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using Demo.Core;
-using Demo.Core.Engine;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
@@ -13,17 +12,22 @@ namespace PhpTravels.Ui.Components
 {
 	public class UserLoginPage : BasePage
 	{
+		public UserLoginPage(IWebDriver driver)
+			: base(driver)
+		{
+		}
+
 		public override string Url => $"{Configuration.PhpTravels.Settings.BaseUrl}login";
 
-		private IWebElement BtnLogin => Browser.Instance.FindElement(By.XPath("//button[@class='btn btn-primary btn-lg btn-block loginbtn']"));
+		private IWebElement BtnLogin => Driver.FindElement(By.XPath("//button[@class='btn btn-primary btn-lg btn-block loginbtn']"));
 
-		private IWebElement TxtEmail => Browser.Instance.FindElement(By.XPath("//input[@name='username']"));
+		private IWebElement TxtEmail => Driver.FindElement(By.XPath("//input[@name='username']"));
 
-		private IWebElement TxtPassword => Browser.Instance.FindElement(By.XPath("//input[@name='password']"));
+		private IWebElement TxtPassword => Driver.FindElement(By.XPath("//input[@name='password']"));
 
 		public void ClickLoginButton()
 		{
-			var wait = new WebDriverWait(Browser.Instance, TimeSpan.FromSeconds(3));
+			var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(3));
 			wait.Until(ExpectedConditions.ElementToBeClickable(BtnLogin));
 			BtnLogin.Click();
 		}

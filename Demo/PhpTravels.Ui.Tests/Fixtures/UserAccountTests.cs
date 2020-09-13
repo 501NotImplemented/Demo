@@ -5,7 +5,7 @@ using PhpTravels.Ui.Tests.Assertions;
 namespace PhpTravels.Ui.Tests.Fixtures
 {
 	[TestFixture(Description = "UI tests for user account page")]
-	[Parallelizable(ParallelScope.Children)]
+	[Parallelizable(ParallelScope.All)]
 	public class UserAccountTests : BaseUiTestFixture
 	{
 		[Test]

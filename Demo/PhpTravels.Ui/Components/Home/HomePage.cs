@@ -1,4 +1,6 @@
-﻿using Demo.Core.Engine;
+﻿using Demo.Core;
+
+using OpenQA.Selenium;
 
 namespace PhpTravels.Ui.Components.Home
 {
@@ -6,13 +8,18 @@ namespace PhpTravels.Ui.Components.Home
 	{
 		private readonly string _title = "PHPTRAVELS |";
 
-		public FeaturedHotelsSection FeaturedHotels => new FeaturedHotelsSection();
+		public HomePage(IWebDriver driver)
+			: base(driver)
+		{
+		}
+
+		public FeaturedHotelsSection FeaturedHotels => new FeaturedHotelsSection(Driver);
 
 		public override string Url => Configuration.PhpTravels.Settings.BaseUrl.Trim();
 
 		public override void WaitToBeOpened()
 		{
-			Browser.WaitForPageTitleToContain(_title);
+			Driver.WaitForPageTitleToContain(_title);
 		}
 	}
 }
